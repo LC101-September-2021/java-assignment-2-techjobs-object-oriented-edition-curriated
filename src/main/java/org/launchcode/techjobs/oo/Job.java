@@ -34,6 +34,22 @@ public class Job {
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
+    public String checkEmptyFields(Object obj){
+        if(obj == null || obj.toString().equals("")){
+            return "Data not available";
+        } else {
+            return obj.toString();
+        }
+    }
+
+    public String checkEmptyName(String nameValue){
+        if (nameValue == null || nameValue.equals("")){
+            return "Data not available";
+        } else {
+            return nameValue;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,6 +61,24 @@ public class Job {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, employer, location, positionType, coreCompetency);
+    }
+
+    @Override
+    public String toString(){
+        String emptyField = "Data not available";
+
+        if(name == null && employer == null && location == null && positionType == null && coreCompetency == null){
+            return "\nOOPS! This job does not seem to exist.\n";
+        }
+
+        return "\n" +
+                "ID: " + id +
+                "\nName: " + checkEmptyName(name) +
+                "\nEmployer: " + checkEmptyFields(employer) +
+                "\nLocation: " + checkEmptyFields(location) +
+                "\nPosition Type: " + checkEmptyFields(positionType) +
+                "\nCore Competency: " + checkEmptyFields(coreCompetency) +
+                "\n";
     }
 
 
